@@ -1,21 +1,62 @@
-// CarVendindMachineProject /
+// CarVendindMachineProject //
 // By: Brian Flores //
-// Computer Science 2 //
+// CS2050 Computer Science 2 //
+// Project Iteration 1 // 
 
 
 import java.util.*;
-import java.io.*;
+
 
 
 public class CarVendingMachineProject {
 
+	
+	public class Main {
+		
+	
+	    public static void main(String[] args) {
+	       
+	    	
+	    	Scanner scanner = new Scanner(System.in);
+	        VendingMachine vendingMachine = null;
+	        
+
+	        System.out.print("Enter the number of floors for the car vending machine: ");
+	        int floors = scanner.nextInt();
+	        System.out.print("Enter the number of spaces for the car vending machine: ");
+	        int spaces = scanner.nextInt();
+	       
+
+	        while (true) {
+	            System.out.println("\n=== Car Vending Machine Menu ===");
+	            
+	            System.out.println("1. Load Car Data");
+	            
+	            System.out.println("2. Display Vending Machine");
+	            
+	            System.out.println("3. Retrieve a Car");
+	            
+	            System.out.println("4. Print Sorted Inventory (Price)");
+	            
+	            System.out.println("5. Print Sorted Inventory (Year)");
+	            
+	            System.out.println("6. Exit");
+	            
+	            System.out.print("Enter your choice: ");
+	            
+	            int choice = scanner.nextInt();
+	            scanner.nextLine();
+	
+	        }
+	    }
    // Car Class // 
 	
     class Car {
     	
     	// Attributes // 
+    	// Private modifier indicating encapsulation //
     	
-        private int year;
+        private int year; 
         private double price;
         private String make;
         private String model;
@@ -30,6 +71,8 @@ public class CarVendingMachineProject {
             this.model = model;
         }
 
+        // My getter methods for Year, Price, Make, and Model of the car //
+        
         public int getYear() {
             return year;
         }
@@ -56,12 +99,17 @@ public class CarVendingMachineProject {
   // Vending Machine Class // 
     
     class VendingMachine {
-        private Car[][] tower;
+        
+    	
+    	private Car[][] tower;
 
         public VendingMachine(int floors, int spaces) {
-            tower = new Car[floors][spaces]; // Initializing 2D Array of floors (Rows) and spaces (Columns) // 
+           
+        	tower = new Car[floors][spaces]; // Initializing 2D Array of floors (Rows) and spaces (Columns) // 
         }
 
+        
+        
         
         // Method for adding car //
         
@@ -97,7 +145,7 @@ public class CarVendingMachineProject {
             	System.out.println("No car located at Floor " + (floor + 1) + " Location " + (space + 1));
             } else {
                 System.out.println("Car retrieved from Floor " + (floor + 1) + " Location " + (space + 1) + ": " + car);
-                tower[floor][space] = null; // remove car
+                tower[floor][space] = null;
             }
             return car;
         }
@@ -114,11 +162,28 @@ public class CarVendingMachineProject {
         		for (int j = 0; j < tower[0].length; j++) {
                  
         			if (tower[i][j] == null) {
-                        System.out.println(" \tSpace  + (j + 1) + ");
+                        System.out.println(" \tSpace " + (j + 1) + " [Empty] ");
 
 		
-		
-	}}
+        			}	
+	
+        	}
 
-}}
-    }}
+        	}
+        	
+        } 
+       
+    } 
+    
+	    } 
+	    } 
+	
+        	
+    
+    
+	    
+	   
+	
+	
+	
+	
