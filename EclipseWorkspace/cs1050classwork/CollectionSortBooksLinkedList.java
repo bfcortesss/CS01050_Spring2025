@@ -8,8 +8,9 @@ public class CollectionSortBooksLinkedList
 
 	/**
 	 * @param args
+	 * @return 
 	 */
-	public static void main(String[] args)
+	public static List<Book> main(String[] args)
 	{
 
 		// Step 1: Create a LinkedList (dynamic)
@@ -72,7 +73,7 @@ public class CollectionSortBooksLinkedList
 		// Step 5: Sort by author then title
 		// add code
 		
-		System.out.println("Books sorted by Author and Title:");
+		System.out.println("Books sorted by Author and Title:");	
 		books.sort(Comparator.comparing(Book::getAuthor).thenComparing(Book::getTitle));
 		for (Book currentBook : books)
 		{
@@ -98,25 +99,71 @@ public class CollectionSortBooksLinkedList
 
         System.out.println();
 
-      
+	
         
         
         // Step 7: Process the sign-out queue
         System.out.println("Processing sign-outs:");
-        // add code
+        while (!signOutQueue.isEmpty()) {
+        	
+           Book bookToSignOut = signOutQueue.poll(); 
+           
+           // retrieves and removes the head
+           
+           System.out.println("Signed out: " + bookToSignOut);
+           
+        }
         
-       while (!signOutQueue.isEmpty()) {
-    	System.out.println("Signed out: " + signOutQueue);
-    	
-   
-    	
-       
-       }
+
+        List<Book> findBooks(List <Book> inventory, String author, int year) {
+        	
+        	   List<Book> results = new ArrayList<>();
+        	   
+        	   for (Book currentBook : inventory) {
+        	       if(currentBook.getAuthor().equalsIgnoreCase(author) && currentBook.getYear() == year) {
+        	           results.add(currentBook);
+        	           
+        	       }
+        	   }
+        	  
+        	   System.out.println(results);
+        	}
+
+        
+        
+        	// Step 10: Use HashMap to organize books by title
+        	
+        System.out.println("\nStep 10 HashMap of books by title:");
+        	
+        Map<String, Book> bookMapByTitle = new HashMap<>();
+        	
+        	//Using for loop to create hash map quickly for book titles
+        	//Remember title must be unique
+        
+        	for (Book book : bookInventory) {
+        	
+            bookMapByTitle.put(book.getTitle(), book);  // key = title, value = book
+            
+        }
+        	// Try getting a book by title
+        	
+            String searchTitle = "Hello World";
+            
+            //containsKey Returns true if the key exists
+            
+            if (bookMapByTitle.containsKey(searchTitle)) {
+                System.out.println("Found book: " + bookMapByTitle.get(searchTitle));
+            } else {
+                System.out.println("Book not found: " + searchTitle);
+            }
+
+
+
        
             
+    
         
-        
-        
+
         
         //Step 8: Search by author
         System.out.println("\nSearching for books by Hannah Fry:");
@@ -131,8 +178,13 @@ public class CollectionSortBooksLinkedList
         
         List<Book> foundBooks = findBooks(bookInventory, "Hannah Fry", 2018);
         printBooks(foundBooks, "Hannah Fry", 2018);
-    }
+    
 	
+	}
+
+	
+     
+
 	
 	
 	
