@@ -10,8 +10,9 @@ public class CollectionSortBooksLinkedList
 	 * @param args
 	 * @return 
 	 */
-	public static List<Book> main(String[] args)
-	{
+	public static List<Book> main(String[] args){
+		
+	
 
 		// Step 1: Create a LinkedList (dynamic)
 		LinkedList<Book> bookInventory = new LinkedList<>();
@@ -69,12 +70,13 @@ public class CollectionSortBooksLinkedList
 
 		
 	
-
+	
 		// Step 5: Sort by author then title
 		// add code
 		
-		System.out.println("Books sorted by Author and Title:");	
-		books.sort(Comparator.comparing(Book::getAuthor).thenComparing(Book::getTitle));
+		System.out.println("Books sorted by Author and Title:");
+		
+		books.sort(Comparator.comparing(Book::getAuthor).thenComparing(Book::getTitle));	
 		for (Book currentBook : books)
 		{
 			System.out.println(currentBook);
@@ -87,7 +89,7 @@ public class CollectionSortBooksLinkedList
         Queue<Book> signOutQueue = new LinkedList<>();
 
         // Simulate students requesting to sign out books
-        signOutQueue.add(bookInventory.get(0)); // Unmasking AI
+        signOutQueue.add(bookInventory.get(0)); // Un-masking AI
         signOutQueue.add(bookInventory.get(2)); // Weapons of Math Destruction
         
         System.out.println(); 
@@ -106,29 +108,26 @@ public class CollectionSortBooksLinkedList
         System.out.println("Processing sign-outs:");
         while (!signOutQueue.isEmpty()) {
         	
-           Book bookToSignOut = signOutQueue.poll(); 
+           Book bookToSignOut = signOutQueue.poll(); // Retrieves and removes the head 
            
-           // retrieves and removes the head
            
            System.out.println("Signed out: " + bookToSignOut);
            
         }
         
-
-        List<Book> findBooks(List <Book> inventory, String author, int year) {
-        	
-        	   List<Book> results = new ArrayList<>();
-        	   
-        	   for (Book currentBook : inventory) {
-        	       if(currentBook.getAuthor().equalsIgnoreCase(author) && currentBook.getYear() == year) {
-        	           results.add(currentBook);
-        	           
-        	       }
-        	   }
-        	  
-        	   System.out.println(results);
+        public static List<Book>findBooks; List<Book>inventory; String author; int year;{
+        	List<Book> results = new ArrayList();
+        	for (Book currentBook : inventory) {
+        		if(currentBook.getAuthor().equalsIgnoreCase(author) && currentBook.getYear() == year) {
+        			results.add(currentBook);
+        			
+        			
+        		}
+        		
+        		return results;
         	}
-
+        }
+ 
         
         
         	// Step 10: Use HashMap to organize books by title
