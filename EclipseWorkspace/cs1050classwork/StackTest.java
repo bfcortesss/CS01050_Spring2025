@@ -38,7 +38,7 @@ public class StackTest {
         System.out.println("Stack after pushing: " + stack);
 
 
-        int popped = stack.pop();
+        int pop = stack.pop();
         System.out.println("Popped element: " + popped);
         System.out.println("Stack after popping: " + stack);
 

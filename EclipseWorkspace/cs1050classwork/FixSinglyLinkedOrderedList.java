@@ -14,6 +14,7 @@ public class FixSinglyLinkedOrderedList
 
 
 		SinglyLinkedListFix list = new SinglyLinkedListFix();
+		
 		list.insertNode(4);
 		list.insertNode(2);
 		list.insertNode(8);

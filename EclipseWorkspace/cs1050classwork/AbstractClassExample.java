@@ -1,14 +1,16 @@
 /**
+ * /**
+ * Abstract Code example 
+ * 
  * 
  */
 
-/**
- * 
- */
+import java.util.ArrayList;
+
 public class AbstractClassExample {
 
 	/**
-	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
 		
@@ -20,6 +22,19 @@ public class AbstractClassExample {
 		Car car = new Car();
 		
 		car.go();
+		
+		
+		
+		// Array initialization // 
+		
+		int[] numbers = new int[5];
+		numbers[0] = 10;
+
+		// ArrayList initialization//
+
+ArrayList<Integer> list = new ArrayList<>();
+		list.add(10);
+
 
 	}
 
@@ -36,23 +51,28 @@ abstract class Vehicle {
 	
 }
 
-
-public class Car extends Vehicle {
-	
-	@Override
-	void go() {
-		
-		System.out.println("The Driver is Driving the car");
-	}
-	
-	
-	
-}
+ 
 
 
 interface Auto {
 	
 	void go();
 	void stop();
+	
+}
+
+class Car implements Auto {
+	@Override
+	public void go() {
+		System.out.println("Car is going.");
+		}
+	
+	@Override
+	public void stop() {
+		System.out.println("Car is stopped.");
+	}
+	
+	
+	
 	
 }
