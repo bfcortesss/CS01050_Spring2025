@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -10,8 +9,11 @@ import java.util.*;
  * Objectives: dynamic LinkedList + HashMap storage,
  * abstract Car + subclasses, Collections.sort, search, queue, remove.
  */
+
 public class CarVendingMachineProject {
-    public static void main(String[] args) {
+    
+	public static void main(String[] args) {
+    	
         Scanner console = new Scanner(System.in);
         
         System.out.print("Enter the number of floors for the car vending machine: ");
@@ -21,6 +23,7 @@ public class CarVendingMachineProject {
         int spaces = console.nextInt();
 
         VendingMachine vendingmachine = new VendingMachine(floors, spaces);
+        
         int choice;
         do {
             System.out.println("\n=== Car Vending Machine Menu ===");
@@ -38,14 +41,17 @@ public class CarVendingMachineProject {
             choice = console.nextInt();
 
             switch (choice) {
+            
                 case 1:
                     System.out.print("Enter the file name: ");
-                    String filename = console.next();
-                    vendingmachine.readFile(filename);
+                    String fileNameInput = console.next();
+                    vendingmachine.readFile(fileNameInput);
                     break;
+                    
                 case 2:
                     vendingmachine.display();
                     break;
+                    
                 case 3:
                     System.out.print("Enter floor: ");
                     int rf = console.nextInt();
@@ -58,12 +64,15 @@ public class CarVendingMachineProject {
                         System.out.println("Car not found at this location.");
                     }
                     break;
+                    
                 case 4:
                     vendingmachine.printSortedInventoryByPrice();
                     break;
+                    
                 case 5:
                     vendingmachine.printSortedInventoryByYear();
                     break;
+                    
                 case 6:
                     console.nextLine(); // consume newline
                     System.out.print("Enter manufacturer: ");
@@ -72,6 +81,7 @@ public class CarVendingMachineProject {
                     String type = console.nextLine();
                     vendingmachine.searchCars(manu, type);
                     break;
+                    
                 case 7:
                     System.out.print("Enter floor: ");
                     int wf = console.nextInt();
@@ -79,9 +89,11 @@ public class CarVendingMachineProject {
                     int ws = console.nextInt();
                     vendingmachine.addToWashQueue(wf, ws);
                     break;
+                    
                 case 8:
                     vendingmachine.processWashQueue();
                     break;
+                    
                 case 9:
                     System.out.print("Enter floor of the car to sell: ");
                     int sf = console.nextInt();
@@ -89,12 +101,15 @@ public class CarVendingMachineProject {
                     int ss = console.nextInt();
                     vendingmachine.sellCar(sf, ss);
                     break;
+                    
                 case 10:
                     System.out.println("Have a nice day. Goodbye!");
                     break;
+                    
                 default:
                     System.out.println("Invalid choice. Please select 1–10.");
             }
+            
         } while (choice != 10);
 
         console.close();
@@ -106,6 +121,7 @@ public class CarVendingMachineProject {
  * 
  * Creates opportunity to create additional sub-classes that hold the same traits and behaviors. 
  */
+
 abstract class Car {
     protected int year;
     protected double price;
@@ -121,52 +137,97 @@ abstract class Car {
         this.pos = pos;
     }
 
-    public int getYear() { return year; }
-    public double getPrice() { return price; }
-    public String getManufacturer() { return manufacturer; }
-    public Position getPosition() { return pos; }
+    public int getYear() { 
+    	
+    	return year;
+    	
+    }
+    
+    public double getPrice() { 
+    	
+    	return price;
+    	
+    	}
+    
+    public String getManufacturer() { 
+    	
+    	return manufacturer;
+    	
+    }
+    
+    public Position getPosition() { 
+    	
+    	return pos; 
+    	
+    	}
 
     /** Marker for type (“Basic” or “Premium”). */
     public abstract String getType();
-
+    
     @Override
     public String toString() {
-        return String.format("%s Car: %s %s %d - $%.1f (Floor: %d, Space: %d)",
-            getType(), manufacturer, model, year, price, pos.floor, pos.space);
+        return getType() + " Car: " + manufacturer + " " + model + " "+ year + " - $" + price + " (Floor: "
+        + pos.floor + ", Space: " + pos.space + ")";
     }
+
 }
 
 /** Subclass for BasicCar extends and implemts the methods of the Abstract Car class. */
 class BasicCar extends Car {
     public BasicCar(int year, double price, String manu, String model, Position pos) {
+    	
         super(year, price, manu, model, pos);
+        
     }
-    @Override public String getType() { return "Basic"; }
+    
+    @Override public String getType() { 
+    	
+    	return "Basic"; 
+    	
+    }
+    
 }
 
 /** Subclass for Premium Car extends and implements the methods of the Abstract Car class. */
 class PremiumCar extends Car {
     public PremiumCar(int year, double price, String manu, String model, Position pos) {
-        super(year, price, manu, model, pos);
+        
+    	super(year, price, manu, model, pos);
+    	
     }
-    @Override public String getType() { return "Premium"; }
+    
+    @Override public String getType() { 
+    	
+    	return "Premium";
+    	
+    }
+    
 }
 
-/** Simple immutable key for HashMap positions */
+/** HashMap Key implementation  */
+
 class Position {
     public final int floor, space;
     public Position(int floor, int space) {
+    	
         this.floor = floor;
         this.space = space;
+        
     }
     @Override public boolean equals(Object o) {
+    	
         if (!(o instanceof Position)) return false;
+        
         Position p = (Position)o;
         return p.floor == floor && p.space == space;
+        
     }
+    
     @Override public int hashCode() {
         return Objects.hash(floor, space);
+        
     }
+    
 }
 
 /**
@@ -181,84 +242,137 @@ class Position {
  * 
  * Queue created to manage Car Wash managemnet system. 
  */
+
 class VendingMachine {
+	
     private int floors, spaces;
-    private LinkedList<Car> inventoryList = new LinkedList<>();
-    private Map<Position,Car> locationMap = new HashMap<>();
-    private Queue<Car> washQueue = new LinkedList<>();
+    private LinkedList<Car> inventoryList = new LinkedList<>(); // LinkedList for Inventory (Dynamic)
+    private Map<Position,Car> locationMap = new HashMap<>(); // HashMap, position lookup. 
+    private Queue<Car> washQueue = new LinkedList<>(); // LinkedList for Carwash Queue
 
     public VendingMachine(int floors, int spaces) {
+    	
         this.floors = floors;
         this.spaces = spaces;
+        
     }
 
     /**
      * Read Car information from a specified file. 
-     * Each line inludesL row number, column number, year, price, manufacturer, and model. 
+     * Each line includes row number, column number, year, price, manufacturer, and model. 
      * Each line is read, created and added to the "inventoryList"
-     * @param filename (File containing car data).
-     * @param vm (vending machine where cars will be added).  
+     * @param filename (File containing car data).  
      */
     
-    public static void readFile(String filename, VendingMachine vm) {
+    public void readFile(String filename) {
+    	
         Scanner fileScanner = null;
-        try {
-            fileScanner = new Scanner(new File(filename));
-            while (fileScanner.hasNext()) {
-                String type = fileScanner.next();        
-                int floor = fileScanner.nextInt();       
-                int space = fileScanner.nextInt();
-                int year  = fileScanner.nextInt();
-                double price = fileScanner.nextDouble();
-                String manu  = fileScanner.next();
-                String model = fileScanner.next();
+        
+        try (Scanner fileScanner1 = new Scanner(new File(filename))) {
+        	
+            while (fileScanner1.hasNext()) {
+            	
+                String type = fileScanner1.next();        
+                int floor = fileScanner1.nextInt();       
+                int space = fileScanner1.nextInt();
+                int year  = fileScanner1.nextInt();
+                double price = fileScanner1.nextDouble();
+                String manu  = fileScanner1.next();
+                String model = fileScanner1.next();
 
                 Position pos = new Position(floor, space);
-                Car car = type.equalsIgnoreCase("B")
-                    ? new BasicCar(year, price, manu, model, pos)
-                    : new PremiumCar(year, price, manu, model, pos);
-
-                // use your new addCar method
-                if (!vm.addCar(car, pos)) {
-                    System.out.printf("Cannot place Car: %s%n", car);
+                
+                Car car;
+                
+                if (type.equalsIgnoreCase("B")) {
+                	
+                    car = new BasicCar(year, price, manu, model, pos);
+                    
+                } else {
+                    
+                	car = new PremiumCar(year, price, manu, model, pos);
+                	
                 }
+                
+                if (!addCar(car, pos)) {
+                	
+                	System.out.printf("Cannot Place Car: " + car);
+                	
+                }
+                
             }
-        } catch (FileNotFoundException e) {
+            
+            
+        } 
+        
+        catch (FileNotFoundException e) {
+        	
             System.out.println("File was not found");
-        } finally {
-            if (fileScanner != null) fileScanner.close();
+            
+        } 
+        
+        finally {
+            
+        	if (fileScanner != null) 
+        		fileScanner.close();
+        	
         }
        
     }
 
+    /**	
+    * Method for adding Car into VendingMachine inventory. 
+    * Checks bounds and occupancy. True if added, False if not.  
+	*/
     
-    	
-
     private boolean addCar(Car car, Position pos) {
-		// TODO Auto-generated method stub
+    	
+		//  Checking for Out of Bounds exception //
+    	if (pos.floor < 1 || pos.floor >floors || pos.space < 1 || pos.space > spaces) {
+    		
+    	
+    		System.out.println("Error: Invalid position at Floor " + pos.floor + " Space " + pos.space);   	
 		return false;
+		
 	}
-
-	/** Prints each Car in inventory—no EMPTY slots. */
-    public void display() {
-        for (Car carToPrint : inventoryList) {
-            System.out.println(carToPrint);
+    	// Occupancy check
+        if (locationMap.containsKey(pos)) {
+            System.out.println("Error: Slot at Floor " + pos.floor + " Space " + pos.space + " is already occupied. " + car + " cannot be placed.");
+            return false;
         }
+        
+        inventoryList.add(car);
+        locationMap.put(pos, car);
+        return true;
+    }
+    
+	/** Method to display all cars sorted by floors and spaces. No EMPTY slots */
+    public void display() {
+    	for (Car carToPrint : inventoryList) {
+        	System.out.println(carToPrint);
+        }
+        
     }
 
     /**
      * Retrieve (for test drive): remove from inventory & map.
-     * Returns Car or null.
+     * Returns Car or NULL if none. 
      */
     
     public Car retrieveCar(int floor, int space) {
         Position pos = new Position(floor, space);
-        Car c = locationMap.remove(pos);
-        if (c != null) inventoryList.remove(c);
-        return c;
+        Car carRetrieved = locationMap.remove(pos);
+        if (carRetrieved != null) inventoryList.remove(carRetrieved);
+        return carRetrieved;
     }
 
-    /** Sort & print by price ascending. */
+    /** 
+     * Sort & print by price ascending order. 
+     * Using and implementing "Comparator for sorting, instead of any other
+     * sorting algorithm. 
+     * USed for both Print by price, and year.
+     * */
+     
     public void printSortedInventoryByPrice() {
         List<Car> copy = new ArrayList<>(inventoryList);
         copy.sort(Comparator.comparingDouble(Car::getPrice));
@@ -266,7 +380,8 @@ class VendingMachine {
         copy.forEach(System.out::println);
     }
 
-    /** Sort & print by year ascending. */
+    /** Sort & print by year ascending order. */
+    
     public void printSortedInventoryByYear() {
         List<Car> copy = new ArrayList<>(inventoryList);
         copy.sort(Comparator.comparingInt(Car::getYear));
@@ -282,10 +397,9 @@ class VendingMachine {
         String manLow = manufacturer.toLowerCase();
         String tLow = type.toLowerCase();
         List<Car> results = new ArrayList<>();
-        for (Car c : inventoryList) {
-            if (c.getManufacturer().toLowerCase().equals(manLow)
-             && c.getType().toLowerCase().equals(tLow)) {
-                results.add(c);
+        for (Car carRetrieved : inventoryList) {
+            if (carRetrieved.getManufacturer().toLowerCase().equals(manLow) && carRetrieved.getType().toLowerCase().equals(tLow)) {
+                results.add(carRetrieved);
             }
         }
         if (results.isEmpty()) {

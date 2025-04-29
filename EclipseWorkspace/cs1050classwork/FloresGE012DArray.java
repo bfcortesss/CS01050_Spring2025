@@ -42,7 +42,7 @@ public class FloresGE012DArray {
 	 
 	 // Car class example provided from Guided Exploration 02. //
 	 
-	class Car {
+	class Vehicle {
 		private String make;
 		
 		public Car() {
