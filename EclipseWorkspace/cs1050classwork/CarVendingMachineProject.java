@@ -121,8 +121,7 @@ public class CarVendingMachineProject {
  * 
  * Creates opportunity to create additional sub-classes that hold the same traits and behaviors. 
  */
-
-abstract class Car {
+ abstract class Car {
     protected int year;
     protected double price;
     protected String manufacturer;
